@@ -1,1 +1,3 @@
 # Github-API-Visualizer
+
+Visualizer for data taken from the Github API. This could take some work....
