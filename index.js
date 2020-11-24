@@ -25,26 +25,23 @@ async function main(user) {
 
 
 async function commitsPerRepo(userReposData, user) {
-  let commits = [];
+  let commits = [['Repo', 'Number of commits']];
   for (let i = 0; i < userReposData.length; i++) 
   {
     const repo = userReposData[i].name;
     let a = await GetRequest(`https://api.github.com/repos/${user}/${repo}/commits`).catch((error) => console.error(error));
-    let b = { repo: repo, commits: a.length };
+    let b = [repo, a.length];
+    //b=[1st-year-workspace, 9]
     commits.push(b);
+    //commits = [['Repo', 'Number of commits'],['1st-year-workspace', 9], ['3rd-Year-College-Work', 30], etc....]
   }
-  //drawChart(commits);
+  drawChart(commits);
 }
 
-function drawChart(){
-  var data = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
-    ['Work',     11],
-    ['Eat',      2],
-    ['Commute',  2],
-    ['Watch TV', 2],
-    ['Sleep',    7]
-  ]);
+async function drawChart(myData){
+  var data = google.visualization.arrayToDataTable(
+    myData
+  );
 
   var options = {
     title: 'Commits',
