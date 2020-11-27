@@ -21,6 +21,21 @@ async function main(user) {
   let reposData = await GetRequest(url).catch(error => console.error(error));
 
   commitsPerRepo(reposData, user)
+  languagesUsed(reposData)
+}
+
+async function languagesUsed(userData){
+  let languages = [['Language', 'Frequency']];
+  for(let i=0; i<userData.length; i++){
+    let languageList = await GetRequest(`https://api.github.com/repos/${user}/${repo}/languages`).catch((error) => console.error(error));
+    //i=0.... languageList == {"Java": 32349}, i=1... languageList == {"Java": 7477, "Go": 3725, "Prolog": 2151}
+    let y = JSON.stringify(languageList);
+    let x = JSON.parse(y);
+    for(var i of Object.entries(x)){
+      languages.push(i);
+    }
+  }
+  drawLanguageChart(languages);
 }
 
 
@@ -49,6 +64,21 @@ async function drawChart(myData){
   };
 
   var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+  chart.draw(data, options);
+};
+
+
+async function drawLanguageChart(myData){
+  var data = google.visualization.arrayToDataTable(
+    myData
+  );
+
+  var options = {
+    title: "Languages",
+    is3D: true,
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById("language_chart"));
   chart.draw(data, options);
 };
 
