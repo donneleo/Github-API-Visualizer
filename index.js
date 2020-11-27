@@ -32,8 +32,8 @@ async function languagesUsed(userData, user){
     //i=0.... languageList == {"Java": 32349}, i=1... languageList == {"Java": 7477, "Go": 3725, "Prolog": 2151}
     let y = JSON.stringify(languageList);
     let x = JSON.parse(y);
-    for(var i of Object.entries(x)){
-      languages.push(i);
+    for(var q of Object.entries(x)){
+      languages.push(q);
     }
   }
   drawLanguageChart(languages);
