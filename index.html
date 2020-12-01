@@ -11,26 +11,42 @@
         <style>
             body{
                 background: lightskyblue;
+                align-items: center;
+                align-content: center;
+            }
+            section{
+                align-self: center;
+                align-content: center;
+            }
+            h1{
+                padding:30px; 
+                text-align: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            h2{
+                padding:25px;
+                text-align: center;
             }
         </style>
     </head>
 
     <body>
-        <div style="padding: 50px; text-align: center;">
+        <div>
             <h1>Github API Data Visualizer</h1>
         </div>
         
         <div style="align-items: center; text-align: center;">
             <form style="text-align: center;">
-                <label for="fname">Input Github Username:</label><br><br>
+                <label for="fname" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Input Github Username:</label><br><br>
                 <input id="fname" type="text" id="username" name="userName"><br><br>
             </form>
-            <button type="button" onclick="handleInput()">Enter</button><br><br>
+            <button type="button" onclick="handleInput()" style= "font-family: Verdana, Geneva, Tahoma, sans-serif;">Enter</button><br><br>
         </div>
 
-       <div id="piechart_3d" style="width:800px; height: 500px; align-items: center; align-self: center; align-content: center; padding-top: 25px;"></div><br><br>
 
-       <div id="language_chart" style="width:800px; height:500px; align-items:center; align-self: center; align-content: center; padding-top:25px"></div>
+       <section id="piechart_3d" style="width:800px; height: 500px; padding-top: 25px; margin:0 auto"></section><br><br>
+
+       <section id="language_chart" style="width:800px; height:500px; padding-top:25px; padding-bottom: 30px; margin:0 auto"></section>
 
     </body>
 
