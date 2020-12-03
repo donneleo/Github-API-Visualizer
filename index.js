@@ -39,6 +39,28 @@ async function languagesUsed(userData, user){
   drawLanguageChart(languages);
 }
 
+/*
+[
+ languages[0] = ["Language", "Frequency"],
+ languages[1] = ["Java", 32349],
+ languages[2] = ["Java", 7477],
+ languages[3] = ["Go", 3725],
+ languages[4] = ["Prolog", 2151],
+ languages[5] = ["Python", 863],
+ languages[6] = ["Python", 2508].
+ languages[7] = ["CSS", 74803],
+ languages[8] = ["SCSS", 54536],
+ languages[9] = ["Javascript", 12809],
+ languages[10] = ["HTML", 6717],
+ languages[11] = ["Python", 4819],
+ languages[12] = ["JavaScript", 2367],
+ languages[13] = ["HTML", 1906],
+ languages[14] = ["Processing", 68140],
+ languages[15] = ["Java", 42470],
+ languages[16] = ["C", 13802]
+]
+
+*/
 
 async function commitsPerRepo(userReposData, user) {
   let commits = [['Repo', 'Number of commits']];
@@ -60,7 +82,7 @@ async function drawChart(myData){
   );
 
   var options = {
-    title: 'Commits',
+    title: 'Commits By Number',
     is3D: true,
   };
 
@@ -75,7 +97,7 @@ async function drawLanguageChart(myData){
   );
 
   var options = {
-    title: "Languages",
+    title: "Languages By Bytes Written",
     is3D: true,
   };
 
