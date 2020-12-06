@@ -36,6 +36,16 @@ async function languagesUsed(userData, user){
       languages.push(q);
     }
   }
+
+  for(var i = 0; i <languages.length; i++){
+    for(var j = i+1; j < languages.length; j++){
+        if(languages[i][0] == languages[j][0]){
+            languages[i][1] = languages[i][1]+languages[j][1];
+            languages.splice(j, 1);
+        }
+    }
+  }
+
   drawLanguageChart(languages);
 }
 
