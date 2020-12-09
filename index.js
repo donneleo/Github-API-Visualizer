@@ -1,15 +1,6 @@
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawChart);
 
-const token = "a467071ff0e79f00c19c4b20e0d2e584464c93f3";
-
-const headers = {
-  "Authorization" : "Token " + token
-}
-const settings = {
-  "method" : "GET",
-  "headers" : headers
-}
 
 function handleInput()
 {
