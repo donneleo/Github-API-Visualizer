@@ -1,6 +1,15 @@
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawChart);
 
+const token = "*********************";
+
+const headers = {
+  "Authorization" : "Token " + token
+}
+const settings = {
+  "method" : "GET",
+  "headers" : headers
+}
 
 function handleInput()
 {
@@ -23,6 +32,7 @@ async function main(user) {
 
   commitsPerRepo(reposData, user)
   languagesUsed(reposData, user)
+  recentWork(user)
 }
 
 async function languagesUsed(userData, user){
@@ -58,8 +68,8 @@ async function commitsPerRepo(userReposData, user) {
   {
     let page = 1;
     const repo = userReposData[i].name;
-    while(page <= 10){  
-      let a = await GetRequest(`https://api.github.com/repos/${user}/${repo}/commits?page=${page}`).catch((error) => console.error(error));
+    while(page <= 5){  
+      let a = await GetRequest(`https://api.github.com/repos/${user}/${repo}/commits?page=${page}&per_page=50`).catch((error) => console.error(error));
         if(a.length > 0){
           let b = [repo, a.length];
           commits.push(b);
@@ -80,6 +90,31 @@ async function commitsPerRepo(userReposData, user) {
 
   drawChart(commits);
 }
+
+async function recentWork(user) {
+  let events = [["Repo Name", "Recent Work"]];
+  let nextEvent = await GetRequest(`https://api.github.com/users/${user}/events?per_page=50`).catch((error) => console.error(error));
+  let i = 0;
+
+  for(repo in nextEvent){
+    let nextInput = [nextEvent[i].repo.name, 1];
+    events.push(nextInput);
+    i++;
+  }
+
+  for(var x = 0; x < events.length; x++){
+    for(var j = x+1; j < events.length; j++){
+        if(events[x][0] == events[j][0]){
+          events[x][1] = events[x][1]+ events[j][1];
+          events.splice(j, 1);
+            j--;
+        }
+    }
+  }
+
+  drawEventChart(events);
+}
+
 
 async function drawChart(myData){
   var data = google.visualization.arrayToDataTable(
@@ -107,5 +142,19 @@ async function drawLanguageChart(myData){
   };
 
   var chart = new google.visualization.PieChart(document.getElementById("language_chart"));
+  chart.draw(data, options);
+};
+
+
+async function drawEventChart(myData){
+  var data = google.visualization.arrayToDataTable(
+    myData
+  );
+
+  var options = {
+    title: "Breakdown of 50 most recent events",
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById("event_chart"));
   chart.draw(data, options);
 };
