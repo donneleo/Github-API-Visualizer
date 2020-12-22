@@ -2,7 +2,7 @@
 
 Visualizer for data taken from the Github API. This could take some work....
 
-### Important Note and Limitationa
+### Important Note and Limitations
 
 This version is incorporating non-authorised requests, and therefore the number of requests which can be made are limited <br>
 
