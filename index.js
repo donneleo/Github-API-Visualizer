@@ -1,7 +1,7 @@
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawChart);
 
-const token = "*********************";
+const token = "****************************";
 
 const headers = {
   "Authorization" : "Token " + token
@@ -14,6 +14,7 @@ const settings = {
 function handleInput()
 {
   var x = document.getElementById("fname").value;
+  document.getElementById("loader").innerHTML = "ONE MOMENT. THERE'S A LOT OF DATA HERE";
   main(x);
 }
 
@@ -92,12 +93,13 @@ async function commitsPerRepo(userReposData, user) {
 }
 
 async function recentWork(user) {
-  let events = [["Repo Name", "Recent Work"]];
+  let events = [["Repo Name", "Number of Events", { role: 'style' }]];
   let nextEvent = await GetRequest(`https://api.github.com/users/${user}/events?per_page=50`).catch((error) => console.error(error));
   let i = 0;
 
   for(repo in nextEvent){
-    let nextInput = [nextEvent[i].repo.name, 1];
+    let colour = getRandomColor();
+    let nextInput = [nextEvent[i].repo.name, 1, colour];
     events.push(nextInput);
     i++;
   }
@@ -113,6 +115,15 @@ async function recentWork(user) {
   }
 
   drawEventChart(events);
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return(color);
 }
 
 
@@ -152,9 +163,15 @@ async function drawEventChart(myData){
   );
 
   var options = {
-    title: "Breakdown of 50 most recent events",
+    title: "Breakdown of most recent events",
+    hAxis: {
+      title: "Repo Name"
+    },
+    vAxis: {
+      title: "Number of Activities per Repo"
+    }
   };
 
-  var chart = new google.visualization.PieChart(document.getElementById("event_chart"));
+  var chart = new google.visualization.ColumnChart(document.getElementById("event_chart"));
   chart.draw(data, options);
 };
