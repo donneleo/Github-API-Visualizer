@@ -15,3 +15,14 @@ The visualizer cuurently displays three graphs for the entered user:
 * A breakdown of the 50 most recent events by repo for the user
 
 
+### How to run
+
+To run this project, you will need to have Dokcer installed.
+
+Then:
+
+1. Clone the code in this repo
+2. Copy this into your terminal `docker build -t eoin-visualizer .`
+3. Then type this into your terminal `docker run -d -p 80:80 eoin-visualizer`
+4. Finally, open your localhost port 8080 by using `http://localhost/8080`
+
