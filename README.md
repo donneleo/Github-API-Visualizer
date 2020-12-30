@@ -24,5 +24,5 @@ Then:
 1. Clone the code in this repo
 2. Copy this into your terminal `docker build -t eoin-visualizer .`
 3. Then type this into your terminal `docker run -d -p 80:80 eoin-visualizer`
-4. Finally, open your localhost port 8080 by using `http://localhost/8080`
+4. Finally, open your localhost port 8080 by using `http://localhost/8080` or `localhost:8080` in your browser
 
