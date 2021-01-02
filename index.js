@@ -1,16 +1,6 @@
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawChart);
 
-const token = "****************************";
-
-const headers = {
-  "Authorization" : "Token " + token
-}
-const settings = {
-  "method" : "GET",
-  "headers" : headers
-}
-
 function handleInput()
 {
   var x = document.getElementById("fname").value;
@@ -20,7 +10,7 @@ function handleInput()
 
 async function GetRequest(url) 
 {
-  const response = await fetch(url, settings);
+  const response = await fetch(url);
   let data = await response.json();
   return data;
 }
@@ -59,7 +49,6 @@ async function languagesUsed(userData, user){
         }
     }
   }
-
   drawLanguageChart(languages);
 }
 
